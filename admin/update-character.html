@@ -246,22 +246,28 @@
     <button type="submit" class="fullWidth">Submit</button>
 </form>
 <script>
-        
-    fetch(`https://opensheet.elk.sh/${sheetID}/Characters`)
-    .then((response) => response.json())
-    .then((characterData) => {
-        storedCharacters = [...characterData];
 
-        fetch(`https://opensheet.elk.sh/${sheetID}/Tagging`)
+    fetch(`https://opensheet.elk.sh/${sheetID}/Characters`)
         .then((response) => response.json())
-        .then((tagData) => {
-            storedTags = [...tagData];
-            
-        }).then(() => {
-            initEditCharacterSelect(document.querySelector('[data-form="edit-character"] #character'), storedCharacters);
-            document.querySelector('#loading').remove();
+        .then((characterData) => {
+            storedCharacters = [...characterData];
+
+            fetch(`https://opensheet.elk.sh/${sheetID}/Tagging`)
+                .then((response) => response.json())
+                .then((tagData) => {
+                    storedTags = [...tagData];
+
+                    fetch(`https://opensheet.elk.sh/${sheetID}/Partners`)
+                        .then((response) => response.json())
+                        .then((partnerData) => {
+                            storedPartners = [...partnerData];
+
+                        }).then(() => {
+                        initEditCharacterSelect(document.querySelector('[data-form="edit-character"] #character'), storedCharacters);
+                        document.querySelector('#loading').remove();
+                    });
+                });
         });
-    });
 </script>
             </section>
         </main>
