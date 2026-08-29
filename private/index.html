@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        @@include('../source/templates/head.html', {
+            "prefix": "./dist"
+        })
+    </head>
+    <body class="index">
+        @@include('../source/templates/nav.html', {
+            "prefix": "."
+        })
+        <main>
+            <div class="records--spinner"><i class="fa-solid fa-cog fa-spin"></i></div>
+        </main>
+        @@include('../source/templates/foot.html', {
+            "prefix": "./dist"
+        })
+    </body>
+</html>
