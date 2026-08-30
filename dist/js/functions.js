@@ -29,65 +29,65 @@ function setTheme() {
 }
 function initMenus() {
     fetch(`https://opensheet.elk.sh/${sheetID}/Sites`)
-    .then((response) => response.json())
-    .then((data) => {
-        storedSites = [...data];
+        .then((response) => response.json())
+        .then((data) => {
+            storedSites = [...data];
 
-        data.sort((a, b) => {
-            if(a.Close === '' && b.Close !== '') {
-                return -1;
-            } else if (b.Close === '' && a.Close !== '') {
-                return 1;
-            } else if(a.Site < b.Site) {
-                return -1;
-            } else if (a.Site > b.Site) {
-                return 1;
-            } else {
-                return 0;
-            }
-        });
+            data.sort((a, b) => {
+                if(a.Close === '' && b.Close !== '') {
+                    return -1;
+                } else if (b.Close === '' && a.Close !== '') {
+                    return 1;
+                } else if(a.Site < b.Site) {
+                    return -1;
+                } else if (a.Site > b.Site) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            });
 
-        data.forEach((site, i) => {
-            let prefix = `..`;
-            if (document.querySelector('body').classList.contains('index')) {
-                prefix = '.';
-            }
-            if(i === 0) {
-                document.querySelector('.subnav[data-menu="sites"] .subnav--inner')
-                    .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${site.URL}" target="_blank" class="${site.Status}">${site.Site}</a>`);
-                document.querySelector('.subnav[data-menu="characters"] .subnav--inner')
-                    .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/characters/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
-                document.querySelector('.subnav[data-menu="threads"] .subnav--inner')
-                    .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/threads/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
-                document.querySelector('.subnav[data-menu="stats"] .subnav--inner')
-                    .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/stats/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
-                document.querySelector('.subnav[data-menu="writing"] .subnav--inner')
-                    .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/writing/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
-            } else if(site.Status !== data[i - 1].Status) {
-                document.querySelector('.subnav[data-menu="sites"] .subnav--inner')
-                    .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${site.URL}" target="_blank" class="${site.Status}">${site.Site}</a>`);
-                document.querySelector('.subnav[data-menu="characters"] .subnav--inner')
-                    .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/characters/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
-                document.querySelector('.subnav[data-menu="threads"] .subnav--inner')
-                    .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/threads/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
-                document.querySelector('.subnav[data-menu="stats"] .subnav--inner')
-                    .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/stats/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
-                document.querySelector('.subnav[data-menu="writing"] .subnav--inner')
-                    .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/writing/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
-            } else {
-                document.querySelector('.subnav[data-menu="sites"] .subnav--inner')
-                    .insertAdjacentHTML('beforeend', `<a href="${site.URL}" target="_blank" class="${site.Status}">${site.Site}</a>`);
-                document.querySelector('.subnav[data-menu="characters"] .subnav--inner')
-                    .insertAdjacentHTML('beforeend', `<a href="${prefix}/characters/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
-                document.querySelector('.subnav[data-menu="threads"] .subnav--inner')
-                    .insertAdjacentHTML('beforeend', `<a href="${prefix}/threads/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
-                document.querySelector('.subnav[data-menu="stats"] .subnav--inner')
-                    .insertAdjacentHTML('beforeend', `<a href="${prefix}/stats/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
-                document.querySelector('.subnav[data-menu="writing"] .subnav--inner')
-                    .insertAdjacentHTML('beforeend', `<a href="${prefix}/writing/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
-            }
-        });
-    }).then(() => {
+            data.forEach((site, i) => {
+                let prefix = `..`;
+                if (document.querySelector('body').classList.contains('index')) {
+                    prefix = '.';
+                }
+                if(i === 0) {
+                    document.querySelector('.subnav[data-menu="sites"] .subnav--inner')
+                        .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${site.URL}" target="_blank" class="${site.Status}">${site.Site}</a>`);
+                    document.querySelector('.subnav[data-menu="characters"] .subnav--inner')
+                        .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/characters/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
+                    document.querySelector('.subnav[data-menu="threads"] .subnav--inner')
+                        .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/threads/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
+                    document.querySelector('.subnav[data-menu="stats"] .subnav--inner')
+                        .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/stats/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
+                    document.querySelector('.subnav[data-menu="writing"] .subnav--inner')
+                        .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/writing/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
+                } else if(site.Status !== data[i - 1].Status) {
+                    document.querySelector('.subnav[data-menu="sites"] .subnav--inner')
+                        .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${site.URL}" target="_blank" class="${site.Status}">${site.Site}</a>`);
+                    document.querySelector('.subnav[data-menu="characters"] .subnav--inner')
+                        .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/characters/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
+                    document.querySelector('.subnav[data-menu="threads"] .subnav--inner')
+                        .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/threads/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
+                    document.querySelector('.subnav[data-menu="stats"] .subnav--inner')
+                        .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/stats/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
+                    document.querySelector('.subnav[data-menu="writing"] .subnav--inner')
+                        .insertAdjacentHTML('beforeend', `<strong>${site.Status}</strong><a href="${prefix}/writing/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
+                } else {
+                    document.querySelector('.subnav[data-menu="sites"] .subnav--inner')
+                        .insertAdjacentHTML('beforeend', `<a href="${site.URL}" target="_blank" class="${site.Status}">${site.Site}</a>`);
+                    document.querySelector('.subnav[data-menu="characters"] .subnav--inner')
+                        .insertAdjacentHTML('beforeend', `<a href="${prefix}/characters/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
+                    document.querySelector('.subnav[data-menu="threads"] .subnav--inner')
+                        .insertAdjacentHTML('beforeend', `<a href="${prefix}/threads/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
+                    document.querySelector('.subnav[data-menu="stats"] .subnav--inner')
+                        .insertAdjacentHTML('beforeend', `<a href="${prefix}/stats/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
+                    document.querySelector('.subnav[data-menu="writing"] .subnav--inner')
+                        .insertAdjacentHTML('beforeend', `<a href="${prefix}/writing/${site.ID}.html" class="${site.Status}">${site.Site}</a>`);
+                }
+            });
+        }).then(() => {
         //add partner form ONLY needs this so run this in that instance instead of in-situ
         if(document.querySelector('[data-form="add-partner"]')) {
             initSiteSelects();
@@ -143,41 +143,41 @@ function initIndex(sites) {
         else return 0;
     });
     fetch(`https://opensheet.elk.sh/${sheetID}/Characters`)
-    .then((response) => response.json())
-    .then((characterData) => {
-        storedCharacters = [...characterData];
-
-        fetch(`https://opensheet.elk.sh/${sheetID}/Threads`)
         .then((response) => response.json())
-        .then((threadData) => {
-            storedThreads = [...threadData];
+        .then((characterData) => {
+            storedCharacters = [...characterData];
 
-            fetch(`https://opensheet.elk.sh/${sheetID}/Writing`)
-            .then((response) => response.json())
-            .then((recordData) => {
-                storedRecords = [...recordData];
+            fetch(`https://opensheet.elk.sh/${sheetID}/Threads`)
+                .then((response) => response.json())
+                .then((threadData) => {
+                    storedThreads = [...threadData];
+
+                    fetch(`https://opensheet.elk.sh/${sheetID}/Writing`)
+                        .then((response) => response.json())
+                        .then((recordData) => {
+                            storedRecords = [...recordData];
 
 
-                let html = ``;
-                sites.forEach((site, i) => {
-                    let siteCharacters = storedCharacters.filter(item => item.Sites.includes(site.Site));
-                    let siteThreads = storedThreads.filter(item => item.Site === site.Site);
-                    let siteRecords = storedRecords.filter(item => item.Site === site.Site);
-                    
-                    if(i === 0) {
-                        html += `<h2 class="h2">Active</h2><div class="grid">`;
-                    } else if(sites[i - 1].Close === '' && site.Close !== '') {
-                        html += `</div><h2 class="h2">Inactive</h2><div class="grid">`;
-                    }
-                    html += formatSiteBlock(site, siteCharacters, siteThreads, siteRecords);
-                    if(sites.length - 1 === i) {
-                        html += `</div>`;
-                    }
+                            let html = ``;
+                            sites.forEach((site, i) => {
+                                let siteCharacters = storedCharacters.filter(item => item.Sites.includes(site.Site));
+                                let siteThreads = storedThreads.filter(item => item.Site === site.Site);
+                                let siteRecords = storedRecords.filter(item => item.Site === site.Site);
+
+                                if(i === 0) {
+                                    html += `<h2 class="h2">Active</h2><div class="grid">`;
+                                } else if(sites[i - 1].Close === '' && site.Close !== '') {
+                                    html += `</div><h2 class="h2">Inactive</h2><div class="grid">`;
+                                }
+                                html += formatSiteBlock(site, siteCharacters, siteThreads, siteRecords);
+                                if(sites.length - 1 === i) {
+                                    html += `</div>`;
+                                }
+                            });
+                            document.querySelector('main').innerHTML = html;
+                        });
                 });
-                document.querySelector('main').innerHTML = html;
-            });
         });
-    });
 }
 function formatSiteBlock(site, characters, threads, records) {
     return `<div class="site">
@@ -205,7 +205,7 @@ function formatSiteBlock(site, characters, threads, records) {
 function initSiteSelects() {
     document.querySelectorAll('select#site').forEach(el => {
         let sites = [...storedSites];
-    
+
         sites.sort((a, b) => {
             if(a.Close === '' && b.Close !== '') {
                 return -1;
@@ -219,7 +219,7 @@ function initSiteSelects() {
                 return 0;
             }
         });
-    
+
         let html = ``;
         sites.forEach((site, i) => {
             if(i === 0) {
@@ -252,7 +252,7 @@ function initPartnerSelect(el, data, type = 'initial', siteField = '#site', hasN
             return 0;
         }
     });
-    
+
     el.closest('form').querySelectorAll('select#partner').forEach(select => {
         if(el.closest('form').dataset.form !== 'edit-partner') {
             if(hasNPC) {
@@ -334,14 +334,23 @@ function initTags(el, site, data) {
             <div class="accordion--content">
                 <div class="multiselect">
                     ${JSON.parse(tag.Set).map(item => {
-                        return `<label>
+            return `<label>
                             <span><input type="${tag.Type === 'single' ? 'radio' : 'checkbox'}" class="tag" name="${tag.Tag.replace(' ', '')}" value="${item}" /></span>
                             <b>${capitalize(item)}</b>
                         </label>`;
-                    }).join('')}
+        }).join('')}
                 </div>
             </div>`;
     });
+    html += `<div class="accordion--trigger">Status</div>
+        <div class="accordion--content">
+            <div class="multiselect">
+                <label>
+                    <span><input type="checkbox" class="tag" name="status" value="active" /></span>
+                    <b>Active</b>
+                </label>
+            </div>
+        </div>`;
 
     el.querySelector('.clip-tags').innerHTML = html;
     initAccordion('.accordion .clip-tags');
@@ -633,11 +642,11 @@ function initRemoveTags(el, data) {
             <div class="accordion--content">
                 <div class="multiselect">
                     ${tags[set].tags.map(item => {
-                        return `<label>
+            return `<label>
                             <span><input type="checkbox" class="tag removeTag" name="removeTag" value="${item}" data-type="${tags[set].type}" /></span>
                             <b>${item}</b>
                         </label>`;
-                    }).join('')}
+        }).join('')}
                 </div>
             </div>`;
     }
@@ -714,13 +723,13 @@ function openSubmenu(e) {
 }
 function sendAjax(form, data, successMessage, async = true) {
     $(form).trigger('reset');
-    
+
     $.ajax({
-        url: `https://script.google.com/macros/s/${deployID}/exec`,   
+        url: `https://script.google.com/macros/s/${deployID}/exec`,
         data: data,
         method: "POST",
         type: "POST",
-        dataType: "json", 
+        dataType: "json",
         async: async,
         success: function () {
             console.log('success');
@@ -731,30 +740,30 @@ function sendAjax(form, data, successMessage, async = true) {
         },
         complete: function () {
             form.querySelector('[type="submit"]').innerText = `Submit`;
-            
+
             if(successMessage) {
                 form.innerHTML = successMessage;
             }
 
             window.scrollTo(0, 0);
-            
+
             console.log('complete');
         }
     });
 }
 function sendAjaxSync(data, form = null, count = null, num = null) {
     $.ajax({
-        url: `https://script.google.com/macros/s/${deployID}/exec`,   
+        url: `https://script.google.com/macros/s/${deployID}/exec`,
         data: data,
         method: "POST",
         type: "POST",
-        dataType: "json", 
+        dataType: "json",
         async: false,
         success: function () {
             console.log('success');
             if(form && count > 1) {
                 form.querySelector('[type="submit"]').innerText = 'Submitting...';
-            } else if(form) { 
+            } else if(form) {
                 if(successMessage) {
                     form.querySelector('[type="submit"]').innerText = 'Submitted';
                     form.innerHTML = successMessage;
@@ -776,7 +785,7 @@ function sendAjaxSync(data, form = null, count = null, num = null) {
                     if(form) {
                         form.querySelector('[type="submit"]').innerText = `Submit`;
                         form.querySelector('[type="submit"]').removeAttribute('disabled');
-                    
+
                         if(successMessage) {
                             form.innerHTML = successMessage;
                         }
@@ -1228,78 +1237,78 @@ function submitCharacter(form) {
 
     //combine data where needed
     fetch(`https://opensheet.elk.sh/${sheetID}/Characters`)
-    .then((response) => response.json())
-    .then((characterData) => {
-        let existing = characterData.filter(item => item.Character === title);
-        if (existing.length === 0) {
-            //finish complex set up
-            let sites = {
-                site: site,
-                id: id,
-            }
-            let ships = {
-                site: site,
-                characters: shipList,
-            }
-            let tags = {
-                site: site,
-                tags: tagArray,
-            }
-            let basics = {
-                site: site,
-                basics: basicsValues,
-                extras: formattedExtras,
-            }
+        .then((response) => response.json())
+        .then((characterData) => {
+            let existing = characterData.filter(item => item.Character === title);
+            if (existing.length === 0) {
+                //finish complex set up
+                let sites = {
+                    site: site,
+                    id: id,
+                }
+                let ships = {
+                    site: site,
+                    characters: shipList,
+                }
+                let tags = {
+                    site: site,
+                    tags: tagArray,
+                }
+                let basics = {
+                    site: site,
+                    basics: basicsValues,
+                    extras: formattedExtras,
+                }
 
-            let data = {
-                SubmissionType: 'add-character',
-                Character: title,
-                Sites: JSON.stringify([sites]),
-                Vibes: vibes,
-                Links: JSON.stringify(linkList),
-                Ships: JSON.stringify([ships]),
-                Tags: JSON.stringify([tags]),
-                Basics: JSON.stringify([basics]),
-            };
+                let data = {
+                    SubmissionType: 'add-character',
+                    Character: title,
+                    Sites: JSON.stringify([sites]),
+                    Vibes: vibes,
+                    Links: JSON.stringify(linkList),
+                    Ships: JSON.stringify([ships]),
+                    Tags: JSON.stringify([tags]),
+                    Basics: JSON.stringify([basics]),
+                };
 
-            return data;
-        } else {
-            //finish complex set up
-            let sites = [...JSON.parse(existing[0].Sites), {
-                site: site,
-                id: id,
-            }];
-            let ships = [...JSON.parse(existing[0].Ships), {
-                site: site,
-                characters: shipList,
-            }];
-            let tags = [...JSON.parse(existing[0].Tags), {
-                site: site,
-                tags: tagArray,
-            }];
-            let newLinks = [...JSON.parse(existing[0].Links), ...linkList]
-            let basics = [...JSON.parse(existing[0].Basics), {
-                site: site,
-                basics: basicsValues,
-                extras: formattedExtras,
-            }];
+                return data;
+            } else {
+                //finish complex set up
+                let sites = [...JSON.parse(existing[0].Sites), {
+                    site: site,
+                    id: id,
+                }];
+                let ships = [...JSON.parse(existing[0].Ships), {
+                    site: site,
+                    characters: shipList,
+                }];
+                let tags = [...JSON.parse(existing[0].Tags), {
+                    site: site,
+                    tags: tagArray,
+                }];
+                let newLinks = [...JSON.parse(existing[0].Links), ...linkList]
+                let basics = [...JSON.parse(existing[0].Basics), {
+                    site: site,
+                    basics: basicsValues,
+                    extras: formattedExtras,
+                }];
 
-            let data = {
-                SubmissionType: 'edit-character',
-                Character: existing[0].Character,
-                Sites: JSON.stringify(sites),
-                Vibes: (existing[0].Vibes && existing[0].Vibes !== '') 
-                    ? `${existing[0].Vibes} ${vibes}`
-                    : vibes,
-                Links: JSON.stringify(newLinks),
-                Ships: JSON.stringify(ships),
-                Tags: JSON.stringify(tags),
-                Basics: JSON.stringify(basics),
-            };
+                let data = {
+                    SubmissionType: 'edit-character',
+                    Character: existing[0].Character,
+                    Sites: JSON.stringify(sites),
+                    Vibes: (existing[0].Vibes && existing[0].Vibes !== '')
+                        ? `${existing[0].Vibes} ${vibes}`
+                        : vibes,
+                    Links: JSON.stringify(newLinks),
+                    Ships: JSON.stringify(ships),
+                    Tags: JSON.stringify(tags),
+                    Basics: JSON.stringify(basics),
+                };
 
-            return data;
-        }
-    }).then((data) => {
+                return data;
+            }
+        }).then((data) => {
         sendAjax(form, data, successMessage);
     });
 }
@@ -1323,7 +1332,7 @@ function submitThread(form) {
 
     //complex fields - tags and featuring
     let tags = Array.from(form.querySelectorAll('.threadTag:checked')).map(item => item.value);
-    
+
     let featuredRows = document.querySelectorAll('.features');
     let featuring = [];
     featuredRows.forEach(row => {
@@ -1452,7 +1461,7 @@ function updateCharacter(form, data) {
     let character = form.querySelector('#character').options[form.querySelector('#character').selectedIndex].value.trim().toLowerCase();
     let selected = Array.from(form.querySelectorAll('.updates input:checked')).map(item => item.value);
     let existing = data.filter(item => item.Character === character)[0];
-    
+
     //change vibes
     if(selected.includes('vibes')) {
         existing.Vibes = form.querySelector('#vibes').value.trim();
@@ -1472,7 +1481,7 @@ function updateCharacter(form, data) {
         });
         existing.Links = JSON.stringify([...JSON.parse(existing.Links), ...linkList]);
     }
-    
+
     //change basics
     if(selected.includes('changeBasics')) {
         if(existing.Basics && existing.Basics !== '') {
@@ -1561,8 +1570,8 @@ function updateCharacter(form, data) {
         relationships.forEach(ship => {
             let writer = ship.options[ship.selectedIndex].innerText.trim().toLowerCase();
             let character = writer === 'npc'
-                            ? ship.closest('.row').querySelector('.npcname').value.trim().toLowerCase()
-                            : ship.closest('.row').querySelector('#character').options[ship.closest('.row').querySelector('#character').selectedIndex].innerText.trim().toLowerCase();
+                ? ship.closest('.row').querySelector('.npcname').value.trim().toLowerCase()
+                : ship.closest('.row').querySelector('#character').options[ship.closest('.row').querySelector('#character').selectedIndex].innerText.trim().toLowerCase();
             let type = ship.closest('.row').querySelector('#type').options[ship.closest('.row').querySelector('#type').selectedIndex].innerText.trim().toLowerCase();
             let section = ship.closest('.row').querySelector('#section').options[ship.closest('.row').querySelector('#section').selectedIndex].innerText.trim().toLowerCase();
             let sectionID = ship.closest('.row').querySelector('#section').options[ship.closest('.row').querySelector('#section').selectedIndex].value;
@@ -1586,6 +1595,7 @@ function updateCharacter(form, data) {
     //add tags
     if(selected.includes('addTags')) {
         let siteTags = form.querySelectorAll('input.tag:checked');
+
         let tagList = {};
         let tagArray = [];
         let replacingTags = [];
@@ -1611,21 +1621,25 @@ function updateCharacter(form, data) {
         //add to existing
         for(instance in existingTags) {
             if(existingTags[instance].site === site) {
-                for(set in existingTags[instance].tags) {
-                    for(newSet in tagArray) {
+                if(existingTags[instance].tags.length > 0) {
+                    for(set in existingTags[instance].tags) {
+                        for(newSet in tagArray) {
 
-                        if(existingTags[instance].tags[set].type === tagArray[newSet].type) {
-                            if(replacingTags.includes(tagArray[newSet].type)) {
-                                existingTags[instance].tags[set].tags = tagArray[newSet].tags;
+                            if(existingTags[instance].tags[set].type === tagArray[newSet].type) {
+                                if(replacingTags.includes(tagArray[newSet].type)) {
+                                    existingTags[instance].tags[set].tags = tagArray[newSet].tags;
+                                } else {
+                                    existingTags[instance].tags[set].tags = [...existingTags[instance].tags[set].tags, ...tagArray[newSet].tags];
+                                }
                             } else {
-                                existingTags[instance].tags[set].tags = [...existingTags[instance].tags[set].tags, ...tagArray[newSet].tags];
-                            }
-                        } else {
-                            if(!notExistingTags.includes(tagArray[newSet].type)) {
-                                notExistingTags.push(tagArray[newSet].type);
+                                if(!notExistingTags.includes(tagArray[newSet].type)) {
+                                    notExistingTags.push(tagArray[newSet].type);
+                                }
                             }
                         }
                     }
+                } else {
+                    existingTags[instance].tags = [...tagArray];
                 }
             }
         }
@@ -1660,7 +1674,7 @@ function updateCharacter(form, data) {
             })
         });
         existingLinks = existingLinks.filter(item => item.title !== 'remove' && item.url !== 'remove');
-        
+
         existing.Links = JSON.stringify(existingLinks);
     }
 
@@ -1717,8 +1731,7 @@ function updateCharacter(form, data) {
 function updateThread(form, data) {
     let currentTitle = form.querySelector('#title').options[form.querySelector('#title').selectedIndex].innerText.trim().toLowerCase();
     let site = form.querySelector('#site').options[form.querySelector('#site').selectedIndex].innerText.trim().toLowerCase();
-    console.log(currentTitle);
-    console.log(site);
+
     let existing = data.filter(item => item.Title === currentTitle && item.Site === site)[0];
     let selected = Array.from(form.querySelectorAll('.updates input:checked')).map(item => item.value);
 
@@ -1810,7 +1823,7 @@ function openFilters(e) {
         document.querySelectorAll('.filter--parent').forEach(filter => filter.classList.remove('is-active'));
         e.closest('.filter--parent').classList.add('is-active');
     }
-    
+
     if(document.querySelector('.filter--parent.is-active')) {
         document.querySelector('.backdrop.vertical').classList.add('is-active');
     } else {
@@ -1821,12 +1834,12 @@ function debounce(fn, threshold) {
     var timeout;
     return function debounced() {
         if (timeout) {
-        clearTimeout(timeout);
+            clearTimeout(timeout);
         }
 
         function delayed() {
-        fn();
-        timeout = null;
+            fn();
+            timeout = null;
         }
         setTimeout(delayed, threshold || 100);
     };
@@ -1836,14 +1849,14 @@ function setCustomFilter() {
 
     //get search value
     qsRegex = document.querySelector(typeSearch).value.toLowerCase().trim();
-    
+
     //add show class to all items to reset
     elements = document.querySelectorAll(gridItem);
     elements.forEach(el => el.classList.add(visible));
-    
+
     //filter by nothing
     let searchFilter = '';
-    
+
     //check each item
     elements.forEach(el => {
         let name = el.querySelector(blockTitle).textContent;
@@ -1903,7 +1916,7 @@ function setCustomFilter() {
             filterCount++;
         }
     });
-    
+
     //set filter to blank
     let filter = [];
     //check if it's only search
@@ -1931,7 +1944,7 @@ function setCustomFilter() {
         filter = filter.join(':not(.status--complete), ');
         filter += `:not(.status--complete)`;
     }
-        
+
     //render isotope
     $container.isotope({
         filter: filter,
@@ -1980,7 +1993,6 @@ function initIsotope() {
     // use value of search field to filter
     const searchInput = document.querySelector(typeSearch);
     const handleKeyUp = debounce((e) => {
-        console.log('Searching for:', e.target.value);
         appendSearchQuery('typesearch', e.target.value);
         setCustomFilter();
     }, 300);
@@ -2076,7 +2088,7 @@ function populateThreads(array, siteObject) {
                 }
             });
         }
-        
+
         let thread = {
             character: JSON.parse(array[i].Character),
             description: array[i].Description,
@@ -2130,9 +2142,9 @@ function populateThreads(array, siteObject) {
     }
 }
 function appendSearchQuery(param, value) {
-	const url = new URL(window.location.href);
-	url.searchParams.set(param, value);
-	window.history.replaceState(null, null, url);
+    const url = new URL(window.location.href);
+    url.searchParams.set(param, value);
+    window.history.replaceState(null, null, url);
 }
 function getDelay(date) {
     let elapsed = (new Date() - Date.parse(date)) / (1000*60*60*24);
@@ -2189,11 +2201,11 @@ function updateStatusClass(thread, active) {
 }
 function sendThreadAjax(data, thread, form = null, complete = null) {
     $.ajax({
-        url: `https://script.google.com/macros/s/${deployID}/exec`,   
+        url: `https://script.google.com/macros/s/${deployID}/exec`,
         data: data,
         method: "POST",
         type: "POST",
-        dataType: "json", 
+        dataType: "json",
         success: function () {
             console.log('success');
         },
@@ -2234,11 +2246,11 @@ function sendThreadAjax(data, thread, form = null, complete = null) {
 }
 function sendInlineRecordAjax(data, container) {
     $.ajax({
-        url: `https://script.google.com/macros/s/${deployID}/exec`,   
+        url: `https://script.google.com/macros/s/${deployID}/exec`,
         data: data,
         method: "POST",
         type: "POST",
-        dataType: "json", 
+        dataType: "json",
         success: function () {
             console.log('success');
         },
@@ -2302,8 +2314,8 @@ function recordReplySend(e) {
         words = e.currentTarget.closest('.record--inline').querySelector('.word-count').value,
         postWords = countContentWords(e.currentTarget.closest('.record--inline').querySelector('.post').value),
         ship = e.currentTarget.closest('.record--inline').querySelector('.ship').value.toLowerCase().trim();
-        e.currentTarget.classList.add('is-updating');
-        e.currentTarget.setAttribute('disabled', true);
+    e.currentTarget.classList.add('is-updating');
+    e.currentTarget.setAttribute('disabled', true);
 
     let data = {
         SubmissionType: 'add-record',
@@ -2435,7 +2447,7 @@ function formatThread(thread) {
 
 /***** CHARACTER TRACKING FUNCTIONS *****/
 function cleanText(text) {
-	return text.replaceAll(' ', '').replaceAll('&amp;', '').replaceAll('&', '').replaceAll(`'`, '').replaceAll(`"`, '').replaceAll(`.`, '').replaceAll(`(`, '').replaceAll(`)`, '').replaceAll(`,`, '').replaceAll(`’`, '').replaceAll(`é`, `e`).replaceAll(`è`, `e`).replaceAll(`ê`, `e`).replaceAll(`ë`, `e`).replaceAll(`ě`, `e`).replaceAll(`ẽ`, `e`).replaceAll(`ē`, `e`).replaceAll(`ė`, `e`).replaceAll(`ę`, `e`).replaceAll(`à`, `a`).replaceAll(`á`, `a`).replaceAll(`â`, `a`).replaceAll(`ä`, `a`).replaceAll(`ǎ`, `a`).replaceAll(`æ`, `ae`).replaceAll(`ã`, `a`).replaceAll(`å`, `a`).replaceAll(`ā`, `a`).replaceAll(`í`, `i`).replaceAll(`ì`, `i`).replaceAll(`ı`, `i`).replaceAll(`î`, `i`).replaceAll(`ï`, `i`).replaceAll(`ǐ`, `i`).replaceAll(`ĭ`, `i`).replaceAll(`ī`, `i`).replaceAll(`ĩ`, `i`).replaceAll(`į`, `i`).replaceAll(`ḯ`, `i`).replaceAll(`ỉ`, `i`).replaceAll(`ó`, `o`).replaceAll(`ò`, `o`).replaceAll(`ȯ`, `o`).replaceAll(`ô`, `o`).replaceAll(`ö`, `o`).replaceAll(`ǒ`, `o`).replaceAll(`ŏ`, `o`).replaceAll(`ō`, `o`).replaceAll(`õ`, `o`).replaceAll(`ǫ`, `o`).replaceAll(`ő`, `o`).replaceAll(`ố`, `o`).replaceAll(`ồ`, `o`).replaceAll(`ø`, `o`).replaceAll(`ṓ`, `o`).replaceAll(`ṑ`, `o`).replaceAll(`ȱ`, `o`).replaceAll(`ṍ`, `o`).replaceAll(`ú`, `u`).replaceAll(`ù`, `u`).replaceAll(`û`, `u`).replaceAll(`ü`, `u`).replaceAll(`ǔ`, `u`).replaceAll(`ŭ`, `u`).replaceAll(`ū`, `u`).replaceAll(`ũ`, `u`).replaceAll(`ů`, `u`).replaceAll(`ų`, `u`).replaceAll(`ű`, `u`).replaceAll(`ʉ`, `u`).replaceAll(`ǘ`, `u`).replaceAll(`ǜ`, `u`).replaceAll(`ǚ`, `u`).replaceAll(`ṹ`, `u`).replaceAll(`ǖ`, `u`).replaceAll(`ṻ`, `u`).replaceAll(`ủ`, `u`).replaceAll(`ȕ`, `u`).replaceAll(`ȗ`, `u`).replaceAll(`ư`, `u`);
+    return text.replaceAll(' ', '').replaceAll('&amp;', '').replaceAll('&', '').replaceAll(`'`, '').replaceAll(`"`, '').replaceAll(`.`, '').replaceAll(`(`, '').replaceAll(`)`, '').replaceAll(`,`, '').replaceAll(`’`, '').replaceAll(`é`, `e`).replaceAll(`è`, `e`).replaceAll(`ê`, `e`).replaceAll(`ë`, `e`).replaceAll(`ě`, `e`).replaceAll(`ẽ`, `e`).replaceAll(`ē`, `e`).replaceAll(`ė`, `e`).replaceAll(`ę`, `e`).replaceAll(`à`, `a`).replaceAll(`á`, `a`).replaceAll(`â`, `a`).replaceAll(`ä`, `a`).replaceAll(`ǎ`, `a`).replaceAll(`æ`, `ae`).replaceAll(`ã`, `a`).replaceAll(`å`, `a`).replaceAll(`ā`, `a`).replaceAll(`í`, `i`).replaceAll(`ì`, `i`).replaceAll(`ı`, `i`).replaceAll(`î`, `i`).replaceAll(`ï`, `i`).replaceAll(`ǐ`, `i`).replaceAll(`ĭ`, `i`).replaceAll(`ī`, `i`).replaceAll(`ĩ`, `i`).replaceAll(`į`, `i`).replaceAll(`ḯ`, `i`).replaceAll(`ỉ`, `i`).replaceAll(`ó`, `o`).replaceAll(`ò`, `o`).replaceAll(`ȯ`, `o`).replaceAll(`ô`, `o`).replaceAll(`ö`, `o`).replaceAll(`ǒ`, `o`).replaceAll(`ŏ`, `o`).replaceAll(`ō`, `o`).replaceAll(`õ`, `o`).replaceAll(`ǫ`, `o`).replaceAll(`ő`, `o`).replaceAll(`ố`, `o`).replaceAll(`ồ`, `o`).replaceAll(`ø`, `o`).replaceAll(`ṓ`, `o`).replaceAll(`ṑ`, `o`).replaceAll(`ȱ`, `o`).replaceAll(`ṍ`, `o`).replaceAll(`ú`, `u`).replaceAll(`ù`, `u`).replaceAll(`û`, `u`).replaceAll(`ü`, `u`).replaceAll(`ǔ`, `u`).replaceAll(`ŭ`, `u`).replaceAll(`ū`, `u`).replaceAll(`ũ`, `u`).replaceAll(`ů`, `u`).replaceAll(`ų`, `u`).replaceAll(`ű`, `u`).replaceAll(`ʉ`, `u`).replaceAll(`ǘ`, `u`).replaceAll(`ǜ`, `u`).replaceAll(`ǚ`, `u`).replaceAll(`ṹ`, `u`).replaceAll(`ǖ`, `u`).replaceAll(`ṻ`, `u`).replaceAll(`ủ`, `u`).replaceAll(`ȕ`, `u`).replaceAll(`ȗ`, `u`).replaceAll(`ư`, `u`);
 }
 function prepTags(data, site) {
     data.forEach((item, i) => {
@@ -2456,7 +2468,7 @@ function prepTags(data, site) {
             </div>
         </div>`;
     });
-    
+
     document.querySelector('.characters--filters-inner').insertAdjacentHTML('beforeend', html);
 }
 function prepCharacters(data, site, longform) {
@@ -2517,7 +2529,7 @@ function prepCharacters(data, site, longform) {
         }
         character.Apps = apps;
     });
-    
+
     return characters;
 }
 function populateCharacters(array, siteObject) {
@@ -2579,6 +2591,10 @@ function formatCharacter(character, viewAll, sites) {
 }
 function formatSingleInstance(character, sites) {
     let tagsString = ``;
+    let availableTagTypes = character.tags.map(item => item.tags.length > 0 ? item.type : '').filter(item => item !== '');
+    if(availableTagTypes.length === 0 || !availableTagTypes.includes('status')) {
+        tagsString += `status--inactive`;
+    }
     for(type in character.tags) {
         character.tags[type].tags.forEach((set, i) => {
             tagsString += ` `;
@@ -2587,7 +2603,7 @@ function formatSingleInstance(character, sites) {
             }
         });
     }
-    
+
     character.ships.sort((a, b) => {
         if(a.character < b.character) {
             return -1;
@@ -2639,7 +2655,7 @@ function formatSingleInstance(character, sites) {
             return 0;
         }
     });
-    
+
     sectionableShips.forEach((ship, i) => {
         if(i === 0) {
             shipHTML += `<div class="character--modal-header">${ship.section ? ship.section : 'Unsorted'}</div><ul>`;
@@ -2687,8 +2703,8 @@ function formatSingleInstance(character, sites) {
             }
         }
     }
-    
-    
+
+
     return `<div class="character lux-track grid-item has-modal ${tagsString} ${character.character.split(' ')[0]}">
         <div class="character--wrap">
             <div class="character--image"><img src="${character.basics.image}" loading="lazy" /></div>
@@ -2778,7 +2794,7 @@ function formatMultipleInstance(character, sites) {
         let site = sites.filter(item => item.Site === siteInstance.site)[0];
         tagsString += ` site--${site.ID}`;
     });
-    
+
     let siteLabels = ``, siteModalButtons = ``, siteModals = ``, siteImages = ``, siteProfiles = ``;
 
     character.sites.sort((a, b) => {
@@ -2786,7 +2802,7 @@ function formatMultipleInstance(character, sites) {
         else if(a.Site > b.Site) return 1;
         else return 0;
     });
-    
+
     character.sites.forEach((siteInstance, i) => {
         let charSite = character.sites.filter(item => item.site === siteInstance.site)[0];
         let basics = character.basics.filter(item => item.site === siteInstance.site)[0].basics;
@@ -2895,7 +2911,7 @@ function formatMultipleInstance(character, sites) {
                 </div>
             </div>`;
     });
-    
+
     return `<div class="character lux-track grid-item ${tagsString} ${character.character.split(' ')[0]} has-modal">
         <div class="character--wrap" data-site="${character.sites[0].site}">
             <div class="character--image">
@@ -2962,7 +2978,7 @@ function basicMarkdownSplit(string, identifier, opening, closing) {
             }
         }
     });
-  
+
     return str;
 }
 function handleSpecialMarkdownAvoidance(value, identifier, opening, closing) {
@@ -2970,24 +2986,24 @@ function handleSpecialMarkdownAvoidance(value, identifier, opening, closing) {
     let strings = value.split(`="`);
     if (strings.length > 1) {
         strings.forEach((string, i) => {
-    
+
             if(string.includes(identifier)) {
-    
-            if(string.includes('href') || string.includes('target') || string.includes('src') || string.includes('class') || string.includes('alt')) {
-                warningIndex = i;
-                newString += basicMarkdownSplit(string, identifier, opening, closing);
-                if(strings.length - 1 !== i) {
-                    newString += `="`;
-                }
-            } else {
-                if(warningIndex === i - 1) {
-                    newString += `${string.split(`">`)[0]}">`;
+
+                if(string.includes('href') || string.includes('target') || string.includes('src') || string.includes('class') || string.includes('alt')) {
+                    warningIndex = i;
                     newString += basicMarkdownSplit(string, identifier, opening, closing);
+                    if(strings.length - 1 !== i) {
+                        newString += `="`;
+                    }
                 } else {
-                    newString += basicMarkdownSplit(string, identifier, opening, closing);
+                    if(warningIndex === i - 1) {
+                        newString += `${string.split(`">`)[0]}">`;
+                        newString += basicMarkdownSplit(string, identifier, opening, closing);
+                    } else {
+                        newString += basicMarkdownSplit(string, identifier, opening, closing);
+                    }
                 }
-            }
-    
+
             } else {
                 if(strings.length - 1 !== i) {
                     newString += `${string}="`;
@@ -3003,9 +3019,9 @@ function handleSpecialMarkdownAvoidance(value, identifier, opening, closing) {
 }
 function formatMarkdown(str, identifier, opening, closing) {
     let original = str;
-  
+
     str = str.split(identifier).map((value, index) => {
-  
+
         if(str.split(identifier).length !== index && value !== '') {
             if ((value.includes('href=') || value.includes('target=') || value.includes('src=') || value.includes('class=') || value.includes('alt=')) && str.split(identifier).length > 1) {
                 return handleSpecialMarkdownAvoidance(value, identifier, opening, closing);
@@ -3017,15 +3033,15 @@ function formatMarkdown(str, identifier, opening, closing) {
         } else if(str.split(identifier).length !== index && value === '') {
             return `${identifier}${identifier}`;
         }
-      
+
     }).join('');
-  
+
     return (str !== '') ? str : original;
 }
 
 /***** STATS AND CHARTS FUNCTIONS *****/
 function createCharacterStats(data, site, sites) {
-    let siteName, characters;
+    let siteName, characters, activeCharacters = [];
     let stats = {
         genders: {
             tags: [],
@@ -3044,12 +3060,24 @@ function createCharacterStats(data, site, sites) {
 
     if(site.length === 1) {
         siteName = site[0].Site;
-        characters = data.map(item => JSON.parse(item.Basics).filter(instance => instance.site === siteName)[0] ? JSON.parse(item.Basics).filter(instance => instance.site === siteName)[0].basics : 'remove').filter(item => item !== 'remove');
+        let siteCharacters = data.filter(item => JSON.parse(item.Sites).map(item => item.site).includes(siteName));
+        siteCharacters.forEach(character => {
+            let siteTags = JSON.parse(character.Tags).filter(instance => instance.site === siteName)[0].tags;
+            if(siteTags.length > 0) {
+                siteTags.forEach(tagSet => {
+                    if(tagSet.type === 'status' && tagSet.tags.includes('active')) {
+                        activeCharacters.push(character);
+                    }
+                })
+            }
+        });
+
+        characters = activeCharacters.map(item => JSON.parse(item.Basics).filter(instance => instance.site === siteName)[0] ? JSON.parse(item.Basics).filter(instance => instance.site === siteName)[0].basics : 'remove').filter(item => item !== 'remove');
 
         stats.total = characters.length;
 
         characters.map(item => item.age = groupAges(item.age));
-    
+
         characters.forEach(character => {
             countStats(stats.genders, character.gender);
             countStats(stats.pronouns, character.pronouns);
@@ -3057,7 +3085,7 @@ function createCharacterStats(data, site, sites) {
         });
     } else {
         let activeSites = sites.filter(item => item.Close === '').map(item => item.Site);
-        characters = data.map(item => ({...item, Basics: JSON.parse(item.Basics)}));
+        characters = activeCharacters.length > 0 ? activeCharacters.map(item => ({...item, Basics: JSON.parse(item.Basics)})) : data.map(item => ({...item, Basics: JSON.parse(item.Basics)}));
         let activeCount = 0;
         characters.forEach(character => {
             let sites = character.Basics.map(item => item.site);
@@ -3081,12 +3109,12 @@ function createThreadStats(data, site, siteID, sites) {
     } else {
         threads = data;
     }
-    
+
     let activeThreads = threads.filter(item => item.Status !== 'complete' && item.Status !== 'archived');
     let completedThreads = threads.filter(item => item.Status === 'complete');
     let icThreads = activeThreads.filter(item => item.Type === 'thread');
     let commThreads = activeThreads.filter(item => item.Type === 'comm');
-    
+
     if(siteID === 'all') {
         let activeSites = sites.filter(item => item.Close === '').map(item => item.Site);
         activeThreads = activeThreads.filter(item => activeSites.includes(item.Site));
@@ -3436,7 +3464,7 @@ function initRecords(sites, records, init = false) {
     }
 
     //filter records and threads by the relevant data
-    let filteredRecords = records.filter(item => 
+    let filteredRecords = records.filter(item =>
         (item.Site === selectedFilters.site || selectedFilters.site === 'all') &&
         (new Date(item.Date).getFullYear() === selectedFilters.year || selectedFilters.year === 'all') &&
         (getMonthName(new Date(item.Date).getMonth()) === selectedFilters.month || selectedFilters.month === 'all') &&
@@ -3477,7 +3505,7 @@ function initRecords(sites, records, init = false) {
     //format and print
     let heatmapHTML = formatHeatmap(filteredRecords, selectedFilters.year === 'all' ? allYears[0] : selectedFilters.year, selectedFilters.metric, selectedFilters.year === 'all'),
         listHTML = formatList(filteredRecords, selectedFilters);
-        
+
     document.querySelector('.records--heatmaps').innerHTML = heatmapHTML;
     document.querySelector('.records--list').innerHTML = listHTML;
     listActiveFilters();
@@ -3614,7 +3642,7 @@ function formatMonthlyHeatmap(records, month, year, max, metric) {
     let firstDay = firstDayOfMonth (getMonthNum(month) - 1, year);
     let numRows = Math.ceil((numDays + firstDay) / 7);
     let lastDay = (numRows * 7) - (numDays + firstDay);
-    
+
     let recordsPerDay = [];
     for(let i = 0; i < numDays; i++) {
         let dayRecords = records.filter(item => new Date(item.Date).getDate() === i + 1);
