@@ -3386,7 +3386,7 @@ function initRecordsFilters(years, characters, ships, sites, partners) {
     })
     document.querySelector('.records .filter--partners').innerHTML = partnersHTML;
 
-    if(sites.length > 1) {
+    if(sites.length >= 1 && document.querySelector('.records .filter--sites')) {
         let sitesHTML = `<button onClick="changeRecordFilter(this)" data-all data-filter="sites" data-site="all" class="is-active">All</button>`;
         sitesHTML += '<b>Active</b>';
         sites.forEach((site, i) => {
