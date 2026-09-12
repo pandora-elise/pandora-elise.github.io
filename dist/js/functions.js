@@ -101,6 +101,14 @@ function initMenus() {
             });
             document.querySelector('#loading').remove();
         }
+        //and edit tag form
+        if(document.querySelector('[data-form="edit-tags"]')) {
+            document.querySelectorAll('.accordion.sites').forEach(el => {
+                initTagSites(el, storedSites);
+                initAccordion();
+            });
+            document.querySelector('#loading').remove();
+        }
         if(document.querySelector('body.index')) {
             initIndex([...storedSites]);
         }
@@ -511,6 +519,7 @@ function initTagSelect(el, data) {
 }
 function adjustTagSites(el) {
     let existing = el.options[el.selectedIndex].dataset.sites.split(', ');
+    console.log(existing);
     el.closest('form').querySelectorAll(`.sites .multiselect label`).forEach(label => label.classList.remove('hidden'));
     existing.forEach(site => {
         if(el.closest('form').querySelector(`input[value="${site}"]`)) {
@@ -1421,7 +1430,17 @@ function updateTags(form, data) {
 
     let existing = data.filter(item => item.Tag === title)[0];
     if(newSites.length > 0) {
-        let combined = [...JSON.parse(existing.Sites), ...newSites];
+        let combined;
+        //replace all
+        if(JSON.parse(existing.Sites)[0] === 'all' && newSites.length > 0 && !newSites.includes('all')) {
+            combined = [ ...newSites];
+        }
+        //switch to all
+        else if(newSites.includes('all')) {
+            combined = ['all'];
+        } else {
+            combined = [...JSON.parse(existing.Sites), ...newSites];
+        }
         existing.Sites = JSON.stringify(combined);
     }
     if(newTags.length > 0) {
@@ -1430,7 +1449,7 @@ function updateTags(form, data) {
     }
     existing.SubmissionType = 'edit-tags';
 
-    sendAjax(form, existing, successMessage);
+    //sendAjax(form, existing, successMessage);
 }
 function updatePartner(form, data) {
     let site = form.querySelector('#site').options[form.querySelector('#site').selectedIndex].innerText.trim().toLowerCase();
@@ -2387,7 +2406,10 @@ function formatThread(thread) {
             partnersText += `, `;
         }
         partnerClasses += `partner--${featured.writer}`;
-        featuringClasses += `featured--${featured.name.split(' ')[0]}-${featured.name.split(' ')[1] ? featured.name.split(' ')[1][0] : ''}`;
+
+        let featuredArray = featured.name.toLowerCase().trim().split(' ');
+        let featuredClass = featuredArray.length > 1 ? `${featuredArray[0]}-${featuredArray[1][0]}` : featuredArray[0];
+        featuringClasses += `featured--${featuredClass}`;
         featuringText += `<a href="${thread.site.URL}/${thread.site.Directory}${featured.id}">${featured.name}</a>`;
         partnersText += `<a href="${thread.site.URL}/${thread.site.Directory}${featured.writerId}">${featured.writer}</a>`;
     });
@@ -3386,7 +3408,7 @@ function initRecordsFilters(years, characters, ships, sites, partners) {
     })
     document.querySelector('.records .filter--partners').innerHTML = partnersHTML;
 
-    if(sites.length >= 1 && document.querySelector('.records .filter--sites')) {
+    if(sites.length > 1) {
         let sitesHTML = `<button onClick="changeRecordFilter(this)" data-all data-filter="sites" data-site="all" class="is-active">All</button>`;
         sitesHTML += '<b>Active</b>';
         sites.forEach((site, i) => {
