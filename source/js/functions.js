@@ -1449,7 +1449,7 @@ function updateTags(form, data) {
     }
     existing.SubmissionType = 'edit-tags';
 
-    //sendAjax(form, existing, successMessage);
+    sendAjax(form, existing, successMessage);
 }
 function updatePartner(form, data) {
     let site = form.querySelector('#site').options[form.querySelector('#site').selectedIndex].innerText.trim().toLowerCase();
